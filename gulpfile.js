@@ -17,6 +17,7 @@ const notify = require('gulp-notify');
 const fs = require('fs');
 const newer = require('gulp-newer');
 const replace = require('gulp-replace');
+const rigger = require('gulp-rigger');
 
 // Less
 const less = require('gulp-less');
@@ -293,7 +294,9 @@ gulp.task('js', function () {
         this.emit('end');
       }
     }))
+    .pipe(rigger())
     .pipe(concat('script.js'))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulpIf(!isDevelopment, uglify()))
     .pipe(size({
       title: 'Размер',

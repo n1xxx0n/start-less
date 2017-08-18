@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "author": "",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +28,7 @@
     "gulp-postcss": "latest",
     "gulp-rename": "latest",
     "gulp-replace": "latest",
+    "gulp-rigger": "^0.5.8",
     "gulp-sequence": "latest",
     "gulp-size": "latest",
     "gulp-sourcemaps": "latest",
