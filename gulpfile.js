@@ -270,7 +270,10 @@ gulp.task('copy:fonts', function () {
 
 // Javascript Files Copying
 gulp.task('copy:js', function () {
-  return gulp.src(dirs.source + '/javascript/*.js')
+  return gulp.src(
+    [ dirs.source + '/javascript/*.js',
+      '!' + dirs.source + '/javascript/script.js'
+    ])
     .pipe(newer(dirs.build + '/javascript'))
     .pipe(size({
       title: 'Размер',
