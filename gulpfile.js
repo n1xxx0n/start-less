@@ -31,6 +31,7 @@ const mqpacker = require("css-mqpacker");
 const objectFitImages = require('postcss-object-fit-images');
 const inlineSVG = require('postcss-inline-svg');
 const sorting = require('postcss-sorting');
+const perfectionist = require('perfectionist');
 
 // Svg Sprite
 const svgstore = require('gulp-svgstore');
@@ -51,77 +52,19 @@ const concat = require('gulp-concat');
 // NODE_ENV=production gulp
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 
+var sortingOptions = require('./sortingOptions.json');
+
 let postCssPlugins = [
   autoprefixer({browsers: ['last 4 versions', '> 1%', 'Firefox ESR']}),
   inlineSVG(),
   objectFitImages(),
-  sorting({
-    'properties-order': [
-      'position',
-      'content',
-      'display',
-      'flex-wrap',
-      'fles-direction',
-      'align-items',
-      'justify-content',
-      'top',
-      'bottom',
-      'left',
-      'right',
-      'width',
-      'max-width',
-      'height',
-      'max-height',
-      'object-fit',
-      'object-position',
-      'background',
-      'background-color',
-      'background-image',
-      'background-repeat',
-      'background-size',
-      'background-position',
-      'color',
-      'margin',
-      'margin-top',
-      'margin-right',
-      'margin-bottom',
-      'margin-left',
-      'padding',
-      'padding-top',
-      'padding-right',
-      'padding-bottom',
-      'padding-left',
-      'border',
-      'border-radius',
-      'font-family',
-      'font-size',
-      'font-style',
-      'font-weight',
-      'font-variant',
-      'letter-spacing',
-      'line-height',
-      'list-style-type',
-      'text-align',
-      'text-decoration',
-      'text-transform',
-      'vertical-align',
-      'cursor',
-      'touch-action',
-      'user-select',
-      'transition',
-      'animation-name',
-      'animation-duration',
-      'animation-delay',
-      'animation-timing-function',
-      'animation-fill-mode',
-      'transform',
-      'opacity',
-      'overflow',
-    ]
-  }),
+  sorting(sortingOptions),
   mqpacker({
     sort: true
   }),
+  perfectionist({
+    indentSize: 2,
+  })
 ];
 
 function reload (done) {

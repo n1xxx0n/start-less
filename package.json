@@ -38,6 +38,7 @@
     "gulp.spritesmith": "^6.5.1",
     "imagemin-pngquant": "latest",
     "merge-stream": "latest",
+    "perfectionist": "^2.4.0",
     "postcss-inline-svg": "latest",
     "postcss-object-fit-images": "latest",
     "postcss-sorting": "^3.0.1",
