@@ -52,7 +52,7 @@ const concat = require('gulp-concat');
 // NODE_ENV=production gulp
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 
-var sortingOptions = require('./sortingOptions.json');
+const sortingOptions = require('./sortingOptions.json');
 
 let postCssPlugins = [
   autoprefixer({browsers: ['last 4 versions', '> 1%', 'Firefox ESR']}),
