@@ -1,6 +1,8 @@
 {
+  "blocks": {},
   "directories": {
-    "source": "./src",
-    "build": "./dist"
+    "source": "./src/",
+    "build": "./dist/",
+    "blocksDirName": "blocks"
   }
 }
