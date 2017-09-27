@@ -4,6 +4,8 @@
 const gulp = require('gulp');
 const projectConfig = require('./projectConfig.json');
 const dirs = projectConfig.directories;
+const lists = getFilesList(projectConfig);
+// console.log(lists);
 
 const gulpSequence = require('gulp-sequence');
 const browserSync = require('browser-sync').create();
@@ -19,6 +21,7 @@ const fs = require('fs');
 const newer = require('gulp-newer');
 const replace = require('gulp-replace');
 const rigger = require('gulp-rigger');
+const wait = require('gulp-wait');
 
 // Less
 const less = require('gulp-less');
@@ -91,6 +94,14 @@ function fileExist(path) {
 
 
 
+let styleImports = '/*!*\n * ВНИМАНИЕ! Этот файл генерируется автоматически.\n * Не пишите сюда ничего вручную, все такие правки будут потеряны.\n */\n\n';
+lists.css.forEach(function(blockPath) {
+  styleImports += '@import \''+blockPath+'\';\n';
+});
+fs.writeFileSync(dirs.source + 'less/style.less', styleImports);
+
+
+
 // Clean
 gulp.task('clean', function () {
   return del(dirs.build + '/**/*')
@@ -133,6 +144,7 @@ gulp.task('style', function () {
         this.emit('end');
       }
     }))
+    .pipe(wait(100))
     .pipe(gulpIf(isDevelopment, sourcemaps.init()))
     .pipe(debug({title: "less:"}))
     .pipe(less())
@@ -168,11 +180,22 @@ gulp.task('copy:css', function () {
 
 
 // Images Copying
+// gulp.task('copy:images', function () {
+//   return gulp.src(
+//     [dirs.source + '/images/*.{gif,png,jpg,jpeg,svg}',
+//     '!' + dirs.source + '/images/svg-sprite/*.svg']
+//     )
+//     .pipe(newer(dirs.build + '/images'))
+//     .pipe(size({
+//       title: 'Размер',
+//       showFiles: true,
+//       showTotal: false,
+//     }))
+//     .pipe(gulp.dest(dirs.build + '/images'));
+// });
+
 gulp.task('copy:images', function () {
-  return gulp.src(
-    [dirs.source + '/images/*.{gif,png,jpg,jpeg,svg}',
-    '!' + dirs.source + '/images/svg-sprite/*.svg']
-    )
+  return gulp.src(lists.img)
     .pipe(newer(dirs.build + '/images'))
     .pipe(size({
       title: 'Размер',
@@ -325,34 +348,68 @@ gulp.task('sprite:png', function (callback) {
 gulp.task('serve', ['build'], function () {
 
   browserSync.init({
-    server: 'dist',
-    startPath: '/index.html',
+    server: dirs.build,
+    startPath: 'index.html',
     open: false,
     port: 8080,
     logPrefix: 'project'
   });
 
-  gulp.watch(
-  [  dirs.source + '/*.html',
-     dirs.source + '/_include/*.html'], ['watch:html']
-  );
-  gulp.watch(
-  [  dirs.source + '/less/style.less',
-     dirs.source + '/less/**/*.less'], ['style']
-  );
+  // gulp.watch(
+  // [  dirs.source + '/*.html',
+  //    dirs.source + '/_include/*.html'], ['watch:html']
+  // );
+
+  // Html
+  gulp.watch([
+    '*.html',
+    '_include/*.html',
+    dirs.blocksDirName + '/**/*.html'
+  ], {cwd: dirs.source}, ['watch:html']);
+
+  // gulp.watch(
+  // [  dirs.source + '/less/style.less',
+  //    dirs.source + '/less/**/*.less'], ['style']
+  // );
+
+  // Styles
+  gulp.watch([
+    dirs.source + 'less/style.less',
+    dirs.source + dirs.blocksDirName + '/**/*.less',
+    projectConfig.addCssBefore,
+    projectConfig.addCssAfter,
+  ], ['style']);
+
+
   gulp.watch(dirs.source + '/javascript/script.js', ['js']);
   gulp.watch(dirs.source + '/css/*.css', ['copy:css']);
-  gulp.watch(
-  [  dirs.source + '/images/*.{gif,png,jpg,jpeg,svg}',
-     '!' + dirs.source + '/images/sprite-svg.svg'], ['copy:images']
-  );
-  gulp.watch(dirs.source + '/videos/*.{mp4,ogv,webm}', ['copy:videos']);
+
+
+  // Fonts
   gulp.watch(dirs.source + '/fonts/*.{ttf,woff,woff2,eot,svg}', ['copy:fonts']);
+
+  // Videos
+  gulp.watch(dirs.source + '/videos/*.{mp4,ogv,webm}', ['copy:videos']);
+
   gulp.watch(dirs.source + '/images/sprite-svg/*.svg', ['sprite:svg', 'html']);
   gulp.watch(dirs.source + '/images/sprite-png/*.png', ['sprite:png']);
+
+  // gulp.watch(
+  // [  dirs.source + '/images/*.{gif,png,jpg,jpeg,svg}',
+  //    '!' + dirs.source + '/images/sprite-svg.svg'], ['copy:images']
+  // );
+
+  // Images
+  if(lists.img.length) {
+    gulp.watch(lists.img, ['watch:images']);
+  }
+
 });
 
 gulp.task('watch:html', ['html'], reload);
+
+gulp.task('watch:images', ['copy:images'], reload);
+
 
 gulp.task('build', function (callback) {
   gulpSequence(
@@ -365,3 +422,34 @@ gulp.task('build', function (callback) {
 });
 
 gulp.task('default', ['serve']);
+
+
+
+function getFilesList(config) {
+
+  let res = {
+    'css': [],
+    // 'js': [],
+    'img': [],
+  };
+
+  // Style
+  for (let blockName in config.blocks) {
+    res.css.push(config.directories.source + config.directories.blocksDirName + '/' + blockName + '/' + blockName + '.less');
+    if(config.blocks[blockName].length) {
+      config.blocks[blockName].forEach(function(elementName) {
+        res.css.push(config.directories.source + config.directories.blocksDirName + '/' + blockName + '/' + blockName + elementName + '.less');
+      });
+    }
+  }
+  res.css = res.css.concat(config.addCssAfter);
+  res.css = config.addCssBefore.concat(res.css);
+
+  // Images
+  for (let blockName in config.blocks) {
+    res.img.push(config.directories.source + config.directories.blocksDirName + '/' + blockName + '/img/*.{jpg,jpeg,gif,png,svg}');
+  }
+  res.img = config.addImages.concat(res.img);
+
+  return res;
+}

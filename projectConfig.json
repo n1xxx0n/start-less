@@ -1,5 +1,25 @@
 {
-  "blocks": {},
+  "blocks": {
+    "some": [],
+    "btn": [],
+    "promo": [],
+    "dropcap": []
+  },
+  "copiedCss": [],
+  "addCssBefore": [
+    "./src/less/bootstrap/bootstrap.less",
+    "../../node_modules/normalize.css/normalize.css",
+    "../../node_modules/owl.carousel/dist/assets/owl.carousel.css",
+    "../../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
+    "../../node_modules/aos/dist/aos.css",
+    "./src/less/variables.less",
+    "./src/less/fonts.less",
+    "./src/less/global.less"
+  ],
+  "addCssAfter": [],
+  "addImages": [
+    "./src/images/*.{jpg,jpeg,gif,png,svg,ico}"
+  ],
   "directories": {
     "source": "./src/",
     "build": "./dist/",
