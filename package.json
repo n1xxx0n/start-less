@@ -46,6 +46,7 @@
     "vinyl-buffer": "latest"
   },
   "dependencies": {
+    "@fancyapps/fancybox": "^3.1.25",
     "aos": "^2.2.0",
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",

@@ -1,22 +1,41 @@
 {
   "blocks": {
-    "some": [],
     "btn": [],
     "promo": [],
-    "dropcap": []
+    "dropcap": [],
+    "page-header": [],
+    "page-footer": [],
+    "sprite-svg": [],
+    "sprite-png": []
   },
-  "copiedCss": [],
   "addCssBefore": [
     "./src/less/bootstrap/bootstrap.less",
-    "../../node_modules/normalize.css/normalize.css",
-    "../../node_modules/owl.carousel/dist/assets/owl.carousel.css",
-    "../../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
-    "../../node_modules/aos/dist/aos.css",
+    "./node_modules/normalize.css/normalize.css",
+    "./node_modules/owl.carousel/dist/assets/owl.carousel.css",
+    "./node_modules/owl.carousel/dist/assets/owl.theme.default.css",
+    "./node_modules/@fancyapps/fancybox/dist/jquery.fancybox.css",
+    "./node_modules/aos/dist/aos.css",
     "./src/less/variables.less",
     "./src/less/fonts.less",
     "./src/less/global.less"
   ],
   "addCssAfter": [],
+  "copiedCss": [],
+  "addJsBefore": [
+    "./node_modules/jquery/dist/jquery.min.js",
+    "./node_modules/jquery-migrate/dist/jquery-migrate.min.js",
+    "./node_modules/bootstrap/js/transition.js",
+    "./node_modules/bootstrap/js/modal.js",
+    "./node_modules/svg4everybody/dist/svg4everybody.min.js",
+    "./node_modules/owl.carousel/dist/owl.carousel.min.js",
+    "./node_modules/@fancyapps/fancybox/dist/jquery.fancybox.js",
+    "./node_modules/aos/dist/aos.js",
+    "./node_modules/rellax/rellax.min.js"
+  ],
+  "addJsAfter": [
+    "./src/javascript/script.js"
+  ],
+  "copiedJs": [],
   "addImages": [
     "./src/images/*.{jpg,jpeg,gif,png,svg,ico}"
   ],
