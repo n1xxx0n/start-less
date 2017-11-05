@@ -33,11 +33,11 @@
     "./node_modules/rellax/rellax.min.js"
   ],
   "addJsAfter": [
-    "./src/javascript/script.js"
+    "./src/js/script.js"
   ],
   "copiedJs": [],
   "addImages": [
-    "./src/images/*.{jpg,jpeg,gif,png,svg,ico}"
+    "./src/img/*.{jpg,jpeg,gif,png,svg,ico}"
   ],
   "directories": {
     "source": "./src/",

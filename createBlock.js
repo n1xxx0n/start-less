@@ -49,7 +49,7 @@ if (blockName) {
         }
 
         else if (extention === 'html') {
-          fileContent = `<!--DEV\n@@include('blocks/${blockName}/${blockName}.html')\n-->\n`;
+          fileContent = ``;
           // fileCreateMsg = '';
         }
 

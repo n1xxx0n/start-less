@@ -42,7 +42,7 @@
     "perfectionist": "^2.4.0",
     "postcss-inline-svg": "latest",
     "postcss-object-fit-images": "latest",
-    "postcss-sorting": "^3.0.2",
+    "postcss-sorting": "^3.1.0",
     "vinyl-buffer": "latest"
   },
   "dependencies": {

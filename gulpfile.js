@@ -175,8 +175,7 @@ gulp.task('copy:css', function(callback) {
         showTotal: false,
       }))
       .pipe(gulp.dest(dirs.build + '/css'))
-  }
-  else {
+  } else {
     callback();
   }
 });
@@ -186,13 +185,13 @@ gulp.task('copy:css', function(callback) {
 // Images copying
 gulp.task('copy:images', function () {
   return gulp.src(lists.img)
-    .pipe(newer(dirs.build + '/images'))
+    .pipe(newer(dirs.build + '/img'))
     .pipe(size({
       title: 'Размер',
       showFiles: true,
       showTotal: false,
     }))
-    .pipe(gulp.dest(dirs.build + '/images'));
+    .pipe(gulp.dest(dirs.build + '/img'));
 });
 
 
@@ -235,8 +234,7 @@ gulp.task('copy:js', function (callback) {
         showTotal: false,
       }))
       .pipe(gulp.dest(dirs.buildPath + '/js'));
-  }
-  else {
+  } else {
     callback();
   }
 });
@@ -246,6 +244,7 @@ gulp.task('copy:js', function (callback) {
 // Script
 gulp.task('js', function (callback) {
   if(lists.js.length > 0) {
+    console.log('Javascript concat/uglify');
     return gulp.src(lists.js)
       .pipe(plumber({
         errorHandler: function(err) {
@@ -307,7 +306,7 @@ gulp.task('sprite:svg', function (callback) {
       console.log('There is no directory with .svg');
       callback();
     }
-  }  else {
+  } else {
     console.log('There is no SVG sprite in current project');
     callback();
   }
@@ -371,11 +370,6 @@ gulp.task('serve', ['build'], function () {
     dirs.blocksDirName + '/**/*.html'
   ], {cwd: dirs.source}, ['watch:html']);
 
-  // gulp.watch(
-  // [  dirs.source + '/less/style.less',
-  //    dirs.source + '/less/**/*.less'], ['style']
-  // );
-
   // Styles
   gulp.watch([
     dirs.source + 'less/style.less',
@@ -384,7 +378,8 @@ gulp.task('serve', ['build'], function () {
     projectConfig.addCssAfter,
   ], ['style']);
 
-  gulp.watch(dirs.source + '/javascript/script.js', ['js']);
+  // Copy JS
+  gulp.watch(dirs.source + '/js/script.js', ['js']);
 
   // Fonts
   gulp.watch(dirs.source + '/fonts/*.{ttf,woff,woff2,eot,svg}', ['copy:fonts']);
