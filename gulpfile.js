@@ -67,6 +67,8 @@ let postCssPlugins = [
   }),
   perfectionist({
     indentSize: 2,
+    trimLeadingZero: false,
+    maxSelectorLength: 1
   })
 ];
 
@@ -110,7 +112,7 @@ gulp.task('clean', function () {
 
 
 // Html
-gulp.task('html', function() {
+gulp.task('html', function () {
   return gulp.src(dirs.source + '/*.html')
     .pipe(plumber({
       errorHandler: function(err) {
