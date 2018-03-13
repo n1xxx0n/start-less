@@ -22,14 +22,42 @@
 @gray-lightest:               hsl(0, 0%, 97%);
 @white:                       hsl(0, 0%, 100%);
 
-@text-color:                  #333;
-@text-color--light:           #e2e2e2;
-
-@bg-color--light:             #e2e2e2;
-@bg-color--dark:              #353535;
-@bg-color--darkest:           #272727;
-
 @blue:                        #34a0d8;
+
+
+
+@text-color:                  @gray-darker;
+@text-color--light:           @gray-lighter;
+
+@bg-color--default:           @white;
+@bg-color--lighter:           @gray-lighter;
+@bg-color--darker:            @gray-darker;
+
+@main-title-color:            ;
+@main-subtitle-color:         ;
+
+@nav-link-color:              ;
+@nav-link-color-hover:        ;
+
+@border-color:                ;
+@box-shadow:                  ;
+
+@hamburger-color:             ;
+
+@button-main-color:           ;
+@button-main-bg-color:        ;
+@button-main-bg-hover:        ;
+
+@button-ghost-color:          ;
+@button-ghost-bg-color:       ;
+@button-ghost-border-color:   ;
+@button-ghost-border-hover:   ;
+
+@input-border:                ;
+@input-border-focus:          ;
+
+@border-color:                currentColor;
+@border-radius:               2px;
 
 
 // Typography
@@ -37,6 +65,10 @@
 // Main size
 @font-size:                   100%;
 @font-size--desktop:          112.5%;
+
+@line-height:                 1.425em;
+@line-height--desktop:        1.5em;
+@line-height--heading:        1.2em;
 
 // Custom
 // @font-size--h1:               2.5em;
@@ -68,10 +100,6 @@
 // @font-size--small:            0.75em;
 // @font-size--accent:           1.125em;
 
-@font-family:                 -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', sans-serif;
-@font-family--sans:           'Fira Sans', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
-@font-family--monospace:      'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
-
-@line-height:                 1.425em;
-@line-height--desktop:        1.5em;
-@line-height--heading:        1.1em;
+@font-family:                 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+@font-family--sans:           "Times New Roman", Times, Georgia, sans-serif;
+@font-family--monospace:      Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;

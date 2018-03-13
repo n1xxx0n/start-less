@@ -58,7 +58,7 @@ const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'developm
 const sortingOptions = require('./sortingOptions.json');
 
 let postCssPlugins = [
-  autoprefixer({browsers: ['last 4 versions', '> 1%', 'Firefox ESR']}),
+  autoprefixer(),
   inlineSVG(),
   objectFitImages(),
   sorting(sortingOptions),

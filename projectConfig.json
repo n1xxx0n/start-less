@@ -1,12 +1,21 @@
 {
   "blocks": {
+    "sprite-svg": [],
+    "sprite-png": [
+      "__include"
+    ],
     "btn": [],
-    "promo": [],
     "dropcap": [],
     "page-header": [],
     "page-footer": [],
-    "sprite-svg": [],
-    "sprite-png": []
+    "promo": [],
+    "testimonials": [],
+    "hamburger": [],
+    "form": [],
+    "main-nav": [],
+    "social": [],
+    "logo": [],
+    "breadcrumbs": []
   },
   "addCssBefore": [
     "./src/less/bootstrap/bootstrap.less",
