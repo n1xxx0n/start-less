@@ -39,6 +39,7 @@ const objectFitImages = require('postcss-object-fit-images');
 const inlineSVG = require('postcss-inline-svg');
 const sorting = require('postcss-sorting');
 const perfectionist = require('perfectionist');
+const postcssEasingGradients = require('postcss-easing-gradients');
 
 // Svg Sprite
 const svgstore = require('gulp-svgstore');
@@ -62,6 +63,7 @@ const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'developm
 const sortingOptions = require('./sortingOptions.json');
 
 let postCssPlugins = [
+  postcssEasingGradients(),
   autoprefixer(),
   inlineSVG(),
   objectFitImages(),
