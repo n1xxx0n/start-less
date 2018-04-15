@@ -7,7 +7,7 @@ const dirs = projectConfig.directories;
 const mkdirp = require('mkdirp');
 
 const blockName = process.argv[2];
-const defaultExtensions = ['less', 'html', 'img'];
+const defaultExtensions = ['less', 'pug', 'img'];
 const extensions = uniqueArray(defaultExtensions.concat(process.argv.slice(3)));
 
 // Use: node createBlock.js [name of block]

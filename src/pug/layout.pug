@@ -1,0 +1,43 @@
+include mixins.pug
+
+doctype html
+html(class='no-js page', lang='ru')
+
+  head
+    meta(charset='utf-8')
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    meta(name='viewport', content='width=device-width, initial-scale=1, viewport-fit=cover')
+    meta(name='format-detection', content='telephone=no')
+    meta(name='format-detection', content='date=no')
+    meta(name='format-detection', content='address=no')
+    meta(name='format-detection', content='email=no')
+    meta(name='google' value='notranslate')
+    meta(name='msapplication-TileColor', content='#ffffff')
+    meta(name='theme-color', content='#ffffff')
+
+    block meta
+      title Home
+
+    block head
+      link(rel='stylesheet', href='css/style.min.css')
+      script.
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+  body
+    noscript JavaScript is disabled
+
+    include ../blocks/sprite-svg/img/sprite-svg.svg
+
+    .page__inner
+      .page__content
+        block header
+          p «шапка»
+        block content
+          p содержимое страницы
+
+      .page__footer-wrapper
+        block footer
+          p «подвал»
+
+    block page-bottom
+      script(src='js/script.min.js')

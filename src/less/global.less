@@ -16,6 +16,9 @@ textarea {
 
 html {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -ms-overflow-style: scrollbar;
+  -ms-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
           font-smoothing: antialiased;
@@ -28,17 +31,7 @@ html {
 }
 
 body {
-  min-width: 320px;
   margin: 0;
-  font-family: @font-family;
-  color: @text-color;
-  font-size: @font-size;
-  line-height: @line-height;
-
-  @media (min-width: @screen-lg) {
-    font-size: @font-size--desktop;
-    line-height: @line-height--desktop;
-  }
 }
 
 img {
@@ -48,16 +41,17 @@ img {
   border: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-ul,
-ol {
-  margin: 0;
-  padding: 0;
+svg {
+  fill: currentColor;
+
+  a &,
+  button & {
+    pointer-events: none;
+  }
+
+  &:not(:root) {
+    overflow: hidden;
+  }
 }
 
 p,
@@ -71,6 +65,18 @@ address,
 figure {
   margin-top: 0;
   margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
 }
 
 address {
@@ -144,7 +150,10 @@ textarea {
 a {
   text-decoration: none;
   background-color: transparent;
-  transition: all 0.25s ease-in-out 0s;
+  transition: all 250ms ease-in-out 0s;
+  background-color: transparent;
+  text-decoration-skip: ink;
+  -webkit-text-decoration-skip: objects;
 }
 
 button {
@@ -157,6 +166,8 @@ hr {
   margin-bottom: 2rem;
   border: 0;
   border-top: 1px solid @border-color;
+  box-sizing: content-box;
+  overflow: visible;
 }
 
 input[type="text"],
@@ -167,15 +178,36 @@ textarea {
     -webkit-appearance: none;
 }
 
-input[type="text"],
-textarea {
-  text-transform: capitalize;
+input[type='search'] {
+  -webkit-appearance: textfield;
 }
 
-blockquote {
+button,
+input {
+  overflow: visible;
+  text-transform: none;
+}
+
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
   padding: 0;
-  margin-left: 0;
-  margin-right: 0;
+  border-style: none;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"] {
+  -webkit-appearance: listbox;
 }
 
 code,
@@ -197,10 +229,6 @@ kbd {
   color: @text-color;
   background-color: @gray-lightest;
   border-radius: @border-radius;
-
-  kbd {
-    padding: 0;
-  }
 }
 
 pre {
