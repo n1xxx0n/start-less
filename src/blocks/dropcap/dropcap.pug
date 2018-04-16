@@ -1,0 +1,9 @@
+mixin dropcap(letter)
+
+  //- Declaration:
+    letter {string} - letter
+
+  //- Use:
+    +dropcap('letter')
+
+  span.s-dropcap&attributes(attributes)!= letter
