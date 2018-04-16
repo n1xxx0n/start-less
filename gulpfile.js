@@ -118,7 +118,7 @@ fs.writeFileSync(dirs.source + 'pug/mixins.pug', pugMixins);
 
 // Clean the dist folder
 gulp.task('clean', function () {
-  console.log('Clean the dist folder');
+  console.log('---------- Clean the dist folder');
   return del(dirs.build + '/**/*')
 });
 
@@ -155,6 +155,7 @@ gulp.task('html', function () {
 
 // less
 gulp.task('style', function () {
+  console.log('---------- Compiling Less files')
   return gulp.src(dirs.source + '/less/style.less')
     .pipe(plumber({
       errorHandler: function(err) {
@@ -186,6 +187,7 @@ gulp.task('style', function () {
 
 // CSS copying
 gulp.task('copy:css', function(callback) {
+  console.log('---------- Copying separate css files')
   if(projectConfig.copiedCss.length) {
     return gulp.src(projectConfig.copiedCss)
       .pipe(postcss(postCssPlugins))
@@ -205,6 +207,7 @@ gulp.task('copy:css', function(callback) {
 
 // Images copying
 gulp.task('copy:images', function () {
+  console.log('---------- Copying images')
   return gulp.src(lists.img)
     .pipe(newer(dirs.build + '/img'))
     .pipe(size({
@@ -219,6 +222,7 @@ gulp.task('copy:images', function () {
 
 // Videos copying
 gulp.task('copy:videos', function () {
+  console.log('---------- Copying video files')
   return gulp.src(dirs.source + '/videos/*.{mp4,ogv,webm}')
     .pipe(newer(dirs.build + '/videos'))
     .pipe(size({
@@ -233,6 +237,7 @@ gulp.task('copy:videos', function () {
 
 // Fonts Copying
 gulp.task('copy:fonts', function () {
+  console.log('---------- Copying fonts')
   return gulp.src(dirs.source + '/fonts/*.{ttf,woff,woff2,eot,svg}')
     .pipe(newer(dirs.build + '/fonts'))
     .pipe(size({
@@ -247,6 +252,7 @@ gulp.task('copy:fonts', function () {
 
 // Javascript Files Copying
 gulp.task('copy:js', function (callback) {
+  console.log('---------- Copying separate js files')
   if(projectConfig.copiedJs.length) {
     return gulp.src(projectConfig.copiedJs)
       .pipe(size({
@@ -265,7 +271,7 @@ gulp.task('copy:js', function (callback) {
 // Script
 gulp.task('js', function (callback) {
   if(lists.js.length > 0) {
-    console.log('Javascript concat/uglify');
+    console.log('---------- JS concat/uglify');
     return gulp.src(lists.js)
       .pipe(plumber({
         errorHandler: function(err) {
@@ -296,7 +302,7 @@ let spriteSvgPath = dirs.source + dirs.blocksDirName + '/sprite-svg/svg/';
 gulp.task('sprite:svg', function (callback) {
   if((projectConfig.blocks['sprite-svg']) !== undefined) {
     if(fileExist(spriteSvgPath) !== false) {
-      console.log('Create SVG sprite');
+      console.log('---------- Create SVG sprite');
       return gulp.src(spriteSvgPath + '*.svg')
         .pipe(svgmin(function (file) {
           return {
@@ -340,7 +346,7 @@ let spritePngPath = dirs.source + dirs.blocksDirName + '/sprite-png/png/';
 gulp.task('sprite:png', function (callback) {
   if((projectConfig.blocks['sprite-png']) !== undefined) {
     if(fileExist(spritePngPath) !== false) {
-      console.log('Create PNG sprite');
+      console.log('---------- Create PNG sprite');
       del(dirs.source + dirs.blocksDirName + '/sprite-png/img/*.png');
       let fileName = 'sprite-png.png';
       let spriteData = gulp.src(spritePngPath + '*.png')
