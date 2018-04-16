@@ -23,4 +23,23 @@
   box-sizing: border-box;
   white-space: nowrap;
   z-index: 1;
+
+  &:hover,
+  &:active,
+  &:focus {}
+
+  &:visited {}
+
+  &--disabled,
+  &:disabled {
+    opacity: @opacity;
+    cursor: not-allowed;
+    color: @text-color;
+    background-color: @gray-lightest;
+    border-color: @gray-lighter;
+
+    @at-root a.s-btn--disabled {
+      pointer-events: none;
+    }
+  }
 }

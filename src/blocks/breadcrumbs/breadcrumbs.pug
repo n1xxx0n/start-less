@@ -1,0 +1,48 @@
+mixin breadcrumb(mods)
+
+  //- Declaration:
+    mods {string} - modifiers
+
+  //- Use:
+    +breadcrumb()
+      +breadcrumb-item('text', '/home')
+      +breadcrumb-item('text', '/services')
+      +breadcrumb-item('text')
+
+  -
+    // Modifiers
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods.trim() + ' s-breadcrumb--' + modsList[i].trim();
+      }
+    }
+
+  ul.s-breadcrumb(class=allMods, aria-label='Breadcrumb', role='navigation')&attributes(attributes)
+    block
+
+
+
+mixin breadcrumb-item(text, href, mods)
+
+  //- Declaration:
+  //-   text   {string} - text
+  //-   href   {string} - link
+  //-   mods   {string} - modifiers
+
+  -
+    // Modifiers
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods.trim() + ' s-breadcrumb--' + modsList[i].trim();
+      }
+    }
+
+  li.s-breadcrumb__item(class=allMods)&attributes(attributes)
+    if(typeof(href) !== 'undefined' && href)
+      a(href=href)!= text
+    else
+      span!= text
