@@ -1,0 +1,25 @@
+mixin owl-carousel(id, mods)
+
+  //- Declaration:
+    id      {string} - id
+    mods    {string} - modifiers
+
+  //- Use:
+        +owl-carousel('slider-id')
+          div Slide 1
+          div Slide 2
+          div Slide 3
+          div Slide 4
+
+  -
+    // Modifiers
+    var allMods = '';
+    if (typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' owl-carousel--' + modsList[i].trim();
+      }
+    }
+
+  .owl-carousel.owl-theme(id=id, class=allMods)&attributes(attributes)
+    block

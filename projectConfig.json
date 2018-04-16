@@ -16,7 +16,9 @@
     "social": [],
     "logo": [],
     "breadcrumbs": [],
-    "page": []
+    "page": [],
+    "owl-carousel": [],
+    "error404": []
   },
   "addCssBefore": [
     "./src/less/bootstrap/bootstrap.less",

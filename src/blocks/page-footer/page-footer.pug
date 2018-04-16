@@ -1,0 +1,22 @@
+mixin page-footer(mods)
+
+  //- Declaration:
+    mods  {string} - modifires
+
+  //- Use:
+    +page-footer()
+      div footer content
+
+  -
+    // Modifires
+    var allMods = '';
+    if (typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' s-page-footer--' + modsList[i].trim();
+      }
+    }
+
+  footer.s-page-footer(class=allMods, role='contentinfo')&attributes(attributes)
+    .s-page-footer__inner
+      block

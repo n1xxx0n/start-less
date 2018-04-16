@@ -1,0 +1,27 @@
+.error404 {
+  font-family: @font-family;
+  min-height: 100%;
+  min-width: 320px;
+  background-color: @bg-color--default;
+  color: @text-color;
+
+  &__inner {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    margin: 0;
+    position: relative;
+    font-size: 14vw;
+    font-weight: 900;
+  }
+
+  &__desc {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}

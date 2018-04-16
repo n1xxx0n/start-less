@@ -1,0 +1,27 @@
+doctype html
+html(class='no-js error404', lang='ru')
+
+  head
+    meta(charset='utf-8')
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    meta(name='viewport', content='width=device-width, initial-scale=1, viewport-fit=cover')
+    meta(name='format-detection', content='telephone=no')
+    meta(name='format-detection', content='date=no')
+    meta(name='format-detection', content='address=no')
+    meta(name='format-detection', content='email=no')
+    meta(name='google' value='notranslate')
+    meta(name='msapplication-TileColor', content='#ffffff')
+    meta(name='theme-color', content='#ffffff')
+
+    block meta
+      title 404
+
+    block head
+      link(rel='stylesheet', href='css/style.min.css')
+      script.
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+  body
+    .error404__inner
+      h1.error404__title 404
+      p.error404__desc ooops, something went wrong
