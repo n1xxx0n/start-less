@@ -1,0 +1,35 @@
+mixin btn(text, mods, isInput)
+
+  //- Declaration:
+    text {string}     - text inside
+    mods {string}     - modifiers
+    isInput {boolean} - true if it's input
+
+  //- Use:
+    +btn('text')(href='/')  - link
+    +btn('text', '', true)  - input
+    +btn('text', 'success') - button
+
+  -
+    // Modifiers
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods.trim() + ' btn--' + modsList[i].trim();
+      }
+    }
+
+  //- Link
+  if (attributes.href)
+    a.s-btn(class=allMods)&attributes(attributes)!= text
+      block
+
+  //- Input
+  else if (typeof(isInput) !== 'undefined' && isInput)
+    input.s-btn(class=allMods, value=text, type='button')&attributes(attributes)
+
+  //- Button
+  else
+    button.s-btn(class=allMods)&attributes(attributes)!= text
+      block
