@@ -90,7 +90,7 @@ let onError = function(err) {
     this.emit('end');
 };
 
-function fileExist(filepath){
+function fileExist(filepath) {
   let flag = true;
   try{
     fs.accessSync(filepath, fs.F_OK);
@@ -117,7 +117,7 @@ fs.writeFileSync(dirs.source + 'pug/mixins.pug', pugMixins);
 
 
 // Clean the dist folder
-gulp.task('clean', function () {
+gulp.task('clean', () => {
   console.log('---------- Clean the dist folder');
   return del(dirs.build + '/**/*')
 });
@@ -125,7 +125,7 @@ gulp.task('clean', function () {
 
 
 // Html
-gulp.task('html', function () {
+gulp.task('html', () => {
   console.log('---------- Compiling Pug files')
   return gulp.src(dirs.source + '/*.pug')
     .pipe(plumber({
@@ -154,7 +154,7 @@ gulp.task('html', function () {
 
 
 // less
-gulp.task('style', function () {
+gulp.task('style', () => {
   console.log('---------- Compiling Less files')
   return gulp.src(dirs.source + '/less/style.less')
     .pipe(plumber({
@@ -186,7 +186,7 @@ gulp.task('style', function () {
 
 
 // CSS copying
-gulp.task('copy:css', function(callback) {
+gulp.task('copy:css', (callback) => {
   console.log('---------- Copying separate css files')
   if(projectConfig.copiedCss.length) {
     return gulp.src(projectConfig.copiedCss)
@@ -206,7 +206,7 @@ gulp.task('copy:css', function(callback) {
 
 
 // Images copying
-gulp.task('copy:images', function () {
+gulp.task('copy:images', () => {
   console.log('---------- Copying images')
   return gulp.src(lists.img)
     .pipe(newer(dirs.build + '/img'))
@@ -221,7 +221,7 @@ gulp.task('copy:images', function () {
 
 
 // Videos copying
-gulp.task('copy:videos', function () {
+gulp.task('copy:videos', () => {
   console.log('---------- Copying video files')
   return gulp.src(dirs.source + '/videos/*.{mp4,ogv,webm}')
     .pipe(newer(dirs.build + '/videos'))
@@ -236,7 +236,7 @@ gulp.task('copy:videos', function () {
 
 
 // Fonts Copying
-gulp.task('copy:fonts', function () {
+gulp.task('copy:fonts', () => {
   console.log('---------- Copying fonts')
   return gulp.src(dirs.source + '/fonts/*.{ttf,woff,woff2,eot,svg}')
     .pipe(newer(dirs.build + '/fonts'))
@@ -251,16 +251,17 @@ gulp.task('copy:fonts', function () {
 
 
 // Javascript Files Copying
-gulp.task('copy:js', function (callback) {
+gulp.task('copy:js', (callback) => {
   console.log('---------- Copying separate js files')
   if(projectConfig.copiedJs.length) {
     return gulp.src(projectConfig.copiedJs)
+      .pipe(uglify())
       .pipe(size({
         title: 'Размер',
         showFiles: true,
         showTotal: false,
       }))
-      .pipe(gulp.dest(dirs.buildPath + '/js'));
+      .pipe(gulp.dest(dirs.build + '/js'));
   } else {
     callback();
   }
@@ -269,7 +270,7 @@ gulp.task('copy:js', function (callback) {
 
 
 // Script
-gulp.task('js', function (callback) {
+gulp.task('js', (callback) => {
   if(lists.js.length > 0) {
     console.log('---------- JS concat/uglify');
     return gulp.src(lists.js)
@@ -299,7 +300,7 @@ gulp.task('js', function (callback) {
 
 // SVG Sprite
 let spriteSvgPath = dirs.source + dirs.blocksDirName + '/sprite-svg/svg/';
-gulp.task('sprite:svg', function (callback) {
+gulp.task('sprite:svg', (callback) => {
   if((projectConfig.blocks['sprite-svg']) !== undefined) {
     if(fileExist(spriteSvgPath) !== false) {
       console.log('---------- Create SVG sprite');
@@ -343,7 +344,7 @@ gulp.task('sprite:svg', function (callback) {
 
 // PNG Sprite
 let spritePngPath = dirs.source + dirs.blocksDirName + '/sprite-png/png/';
-gulp.task('sprite:png', function (callback) {
+gulp.task('sprite:png', (callback) => {
   if((projectConfig.blocks['sprite-png']) !== undefined) {
     if(fileExist(spritePngPath) !== false) {
       console.log('---------- Create PNG sprite');
@@ -389,7 +390,7 @@ gulp.task('build', gulp.series(
 ));
 
 
-gulp.task('serve', gulp.series('build', function () {
+gulp.task('serve', gulp.series('build', () => {
 
   browserSync.init({
     server: dirs.build,
@@ -469,7 +470,7 @@ gulp.task('default',
 
 
 
-function getFilesList(config){
+function getFilesList(config) {
 
   let res = {
     'css': [],
@@ -482,18 +483,18 @@ function getFilesList(config){
   for (let blockName in config.blocks) {
     var blockPath = config.directories.source + config.directories.blocksDirName + '/' + blockName + '/';
 
-    if(fileExist(blockPath)) {
+    if (fileExist(blockPath)) {
 
       // Pug
-      if(fileExist(blockPath + blockName + '.pug')){
+      if (fileExist(blockPath + blockName + '.pug')) {
         res.pug.push('../' + config.directories.blocksDirName + '/' + blockName + '/' + blockName + '.pug');
       }
-      else {
-        console.log(`Block ${blockName} does not have pug file`);
-      }
+      // else {
+      //   console.log(`Block ${blockName} does not have pug file`);
+      // }
 
       // Style
-      if(fileExist(blockPath + blockName + '.less')){
+      if (fileExist(blockPath + blockName + '.less')) {
         res.css.push(blockPath + blockName + '.less');
         if(config.blocks[blockName].length) {
           config.blocks[blockName].forEach(function(elementName) {
@@ -503,12 +504,12 @@ function getFilesList(config){
           });
         }
       }
-      else {
-        console.log(`Block ${blockName} does not have less file`);
-      }
+      // else {
+      //   console.log(`Block ${blockName} does not have less file`);
+      // }
 
       // JS
-      if(fileExist(blockPath + blockName + '.js' )){
+      if (fileExist(blockPath + blockName + '.js' )) {
         res.js.push(blockPath + blockName + '.js');
         if(config.blocks[blockName].length) {
           config.blocks[blockName].forEach(function(elementName) {
@@ -518,9 +519,9 @@ function getFilesList(config){
           });
         }
       }
-      else {
-        console.log(`Block ${blockName} does not have js file`);
-      }
+      // else {
+      //   console.log(`Block ${blockName} does not have js file`);
+      // }
 
       // Images
       res.img.push(config.directories.source + config.directories.blocksDirName + '/' + blockName + '/img/*.{jpg,jpeg,gif,png,svg}');

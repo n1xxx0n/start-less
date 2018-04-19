@@ -6,11 +6,19 @@
 }
 
 .page {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -ms-overflow-style: scrollbar;
+  -ms-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+          font-smoothing: antialiased;
   min-height: 100%;
   min-width: 320px;
   color: @text-color;
   font-family: @font-family;
   font-size: @font-size; // 100% = 16 pixels
+  scroll-behavior: smooth;
 
   @media (min-width: @screen-lg) {
     font-size: @font-size--desktop; // 112.5% = 18 pixels

@@ -1,5 +1,5 @@
 doctype html
-html(class='no-js error404', lang='ru')
+html(class='no-js page', lang='ru')
 
   head
     meta(charset='utf-8')
@@ -22,6 +22,7 @@ html(class='no-js error404', lang='ru')
         document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 
   body
-    .error404__inner
-      h1.error404__title 404
-      p.error404__desc ooops, something went wrong
+    .error404
+      .error404__inner
+        h1.error404__title 404
+        p.error404__desc ooops, something went wrong
